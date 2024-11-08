@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="14">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="14">
  <editorsettings>
   <export format="json"/>
  </editorsettings>
@@ -3505,7 +3505,10 @@
  <tileset firstgid="945" name="sky" tilewidth="16" tileheight="16" tilecount="944" columns="59">
   <image source="../../../../../../../../Downloads/Free Pixel Art plataformer painted style/Free Pixel Art plataformer painted style/PNG/Mountains/Background.png" width="950" height="256"/>
  </tileset>
- <layer id="4" name="Sky_Layer" width="30" height="20">
+ <tileset firstgid="1889" name="apple" tilewidth="16" tileheight="16" tilecount="4" columns="2">
+  <image source="../../../../../../../../Downloads/apple.png" width="33" height="32"/>
+ </tileset>
+ <layer id="4" name="Sky_Layer" width="30" height="20" visible="0">
   <data encoding="csv">
 947,948,949,950,951,952,953,954,955,956,957,958,959,960,961,962,963,964,965,966,967,968,969,970,971,972,973,974,975,976,
 947,948,949,950,951,952,953,954,955,956,957,958,959,960,961,962,963,964,965,966,967,968,969,970,971,972,973,974,975,976,
@@ -3529,7 +3532,7 @@
 1783,1783,1783,1783,1783,1842,1842,1842,1843,1844,1845,1846,1847,1848,1849,1850,1851,1852,1853,1854,1855,1856,1857,1858,1859,1860,1861,1807,1808,1809
 </data>
  </layer>
- <layer id="8" name="Elements_Layer" width="30" height="20">
+ <layer id="8" name="Elements_Layer" width="30" height="20" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -3553,7 +3556,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="2" name="Ground_Layer" width="30" height="20">
+ <layer id="2" name="Ground_Layer" width="30" height="20" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -3577,7 +3580,8 @@
 0,0,0,434,904,905,906,907,908,909,910,911,912,913,914,915,439,0,0,434,908,909,904,904,905,906,907,908,909,910
 </data>
  </layer>
- <layer id="1" name="Floor_Layer" width="30" height="20">
+ <objectgroup id="9" name="Objects"/>
+ <layer id="1" name="Floor_Layer" width="30" height="20" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

@@ -5,6 +5,9 @@ export default class Scene_01 extends Phaser.Scene {
     super();
   }
 
+  money;
+  coins = 0;
+
   // Runs once, loads up assets like images and audio
   preload() {
     // this.load.image('keyWord', 'assets/...');
@@ -19,6 +22,9 @@ export default class Scene_01 extends Phaser.Scene {
 
     // Load music
     this.load.audio("jump", "assets/jump.mp3");
+
+    // Load elements
+    this.load.image("apple", "assets/apple.png");
   }
 
   // Runs once, after all assets in preload are loaded
@@ -45,8 +51,13 @@ export default class Scene_01 extends Phaser.Scene {
     this.player = this.physics.add.sprite(100, 100, "player");
     this.player.setCollideWorldBounds(true);
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.spacebar = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE
+    );
+
     this.physics.add.collider(this.player, floor);
     this.jump_sound = this.sound.add("jump", { volume: 0.5, loop: false });
+    this.player.setGravityY(200);
 
     this.anims.create({
       key: "move",
@@ -71,10 +82,59 @@ export default class Scene_01 extends Phaser.Scene {
     });
 
     map.createLayer("Ground_Layer", tilesetTile);
+
+    // Create a group of apples
+    this.apples = this.physics.add.group({
+      key: "apple",
+      repeat: 3,
+      setXY: { x: 20, y: 100, stepX: 100 },
+    });
+
+    this.physics.add.overlap(
+      this.player,
+      this.apples,
+      this.collect,
+      null,
+      this
+    );
+
+    this.apples.children.iterate(function (apple) {
+      // Change hitbox size
+      apple.body.setSize(10, 10);
+
+      // Set random position
+      // let value = Phaser.Math.Between(10, 250);
+      // apple.setPosition(apple.x, apple.y + value);
+
+      // Move hitbox position
+      // apple.body.setOffset(0, 0);
+      // Move elements
+      // apple.setVelocityX(20);
+      // let left = true;
+      // setInterval(() => {
+      //   if (left) {
+      //     left = false;
+      //     apple.setVelocityX(-20);
+      //   } else {
+      //     left = true;
+      //     apple.setVelocityX(20);
+      //   }
+      // }, 3000);
+    });
+
+    this.money = this.add.text(20, 20, "Apples: " + this.coins, {
+      fontFamily: "Quicksand",
+      fontSize: "16px",
+      color: "#101010",
+      fontStyle: "normal",
+      strokeThickness: 2,
+    });
   }
 
   // Runs once per frame for the duration of the scene
   update() {
+    console.log(this.player.x + ", " + this.player.y);
+
     // Player movement
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-50);
@@ -90,9 +150,19 @@ export default class Scene_01 extends Phaser.Scene {
     }
 
     // Player jump
-    if (this.cursors.up.isDown && this.player.body.onFloor()) {
+    if (
+      (this.spacebar.isDown || this.cursors.up.isDown) &&
+      this.player.body.onFloor()
+    ) {
       this.player.setVelocityY(-250);
       this.jump_sound.play();
     }
+  }
+
+  collect(player, element) {
+    this.coins += 1;
+    this.money.setText("Apples: " + this.coins);
+
+    element.destroy();
   }
 }
